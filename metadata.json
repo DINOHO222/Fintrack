@@ -1,0 +1,5 @@
+{
+  "name": "FinTrack",
+  "description": "A minimalist, offline-first personal finance tracker featuring expense logging and stock portfolio management with a dark-mode neon aesthetic.",
+  "requestFramePermissions": []
+}
