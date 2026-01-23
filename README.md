@@ -22,9 +22,7 @@
 
 | Dashboard (首頁) | Expense Tracker (記帳) | Stock Portfolio (投資) |
 |:---:|:---:|:---:|
-| <img src="public/screenshots/mainpage.png" width="250" alt="Home Screen" /> | <img src="public/screenshots/expensepage.png" width="250" alt="Expense Tracker" /> | <img src="public/screenshots/stockpage.png" width="250" alt="Stock Portfolio" /> |
-
-*(Make sure to upload screenshots to `public/screenshots/` folder)*
+| <img src="public/screenshot/mainpage.png" width="250" alt="Home Screen" /> | <img src="public/screenshot/expensepage.png" width="250" alt="Expense Tracker" /> | <img src="public/screenshot/stockpage.png" width="250" alt="Stock Portfolio" /> |
 
 ---
 
