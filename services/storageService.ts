@@ -69,5 +69,12 @@ export const storageService = {
 
     localStorage.setItem(PORTFOLIO_KEY, JSON.stringify(updatedPortfolio));
     return updatedPortfolio;
+  },
+
+  deleteTransaction: (id: string) => {
+    const expenses = storageService.getExpenses();
+    const updated = expenses.filter(e => e.id !== id);
+    localStorage.setItem(EXPENSES_KEY, JSON.stringify(updated));
+    return updated;
   }
 };

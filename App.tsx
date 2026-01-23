@@ -28,7 +28,7 @@ const App: React.FC = () => {
   const renderScreen = () => {
     switch (route) {
       case AppRoute.HOME:
-        return <Home expenses={expenses} portfolio={portfolio} onNavigate={handleNavigate} />;
+        return <Home expenses={expenses} portfolio={portfolio} onNavigate={handleNavigate} onUpdate={loadData} />;
       case AppRoute.EXPENSE:
         return <ExpenseTracker onBack={() => setRoute(AppRoute.HOME)} onSave={loadData} />;
       case AppRoute.PORTFOLIO:
@@ -43,20 +43,20 @@ const App: React.FC = () => {
   // If we are in the expense tracker 'modal' mode or analysis, we might want to hide bottom nav or style differently.
   // But for simplicity of this web app structure, we keep the Layout wrapper for all, 
   // or conditionally render Layout based on route.
-  
+
   // Design Decision: Expense Tracker has its own full screen vibe in the mockups.
   // Portfolio and Home share the bottom nav. Analysis usually does too.
-  
+
   const isFullScreen = route === AppRoute.EXPENSE;
 
   if (isFullScreen) {
-      return (
-          <div className="min-h-screen bg-black text-white flex justify-center">
-            <div className="w-full max-w-md h-[100dvh] bg-background relative shadow-2xl overflow-hidden border-x border-white/5">
-                {renderScreen()}
-            </div>
-          </div>
-      );
+    return (
+      <div className="min-h-screen bg-black text-white flex justify-center">
+        <div className="w-full max-w-md h-[100dvh] bg-background relative shadow-2xl overflow-hidden border-x border-white/5">
+          {renderScreen()}
+        </div>
+      </div>
+    );
   }
 
   return (
