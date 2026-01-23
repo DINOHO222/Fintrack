@@ -14,7 +14,6 @@ const ExpenseTracker: React.FC<ExpenseTrackerProps> = ({ onBack, onSave }) => {
   const [selectedCategory, setSelectedCategory] = useState('');
   const [date, setDate] = useState(new Date());
 
-  // Success Modal State
   const [showSuccess, setShowSuccess] = useState(false);
 
   // Filter categories based on type

@@ -8,9 +8,11 @@ const API_KEY = import.meta.env.VITE_STOCK_API_KEY;
 
 // Debug Log for Environment Variables (Safety Masked)
 const maskedKey = API_KEY ? `${API_KEY.substring(0, 3)}...` : 'MISSING';
-console.log(`[StockService] Environment Check - BaseURL: ${API_BASE_URL}, API Key: ${maskedKey}`);
+if (import.meta.env.DEV) {
+  console.log(`[StockService] Environment Check - BaseURL: ${API_BASE_URL}, API Key: ${maskedKey}`);
+}
 
-export const fetchStockQuote = async (symbol: string): Promise<StockQuote> => {
+export const fetchStockQuote = async (symbol: string): Promise<StockQuote | null> => {
   const cleanSymbol = symbol ? symbol.toUpperCase() : '';
 
   try {
@@ -36,8 +38,10 @@ export const fetchStockQuote = async (symbol: string): Promise<StockQuote> => {
       throw new Error(`Finnhub returned empty data for ${cleanSymbol} (Symbol likely invalid)`);
     }
 
-    // Success Log
-    console.log(`[API Success] ${cleanSymbol}: $${c}`);
+    // Success Log (Development only)
+    if (import.meta.env.DEV) {
+      console.log(`[API Success] ${cleanSymbol}: $${c}`);
+    }
 
     return {
       symbol: cleanSymbol,
@@ -48,17 +52,12 @@ export const fetchStockQuote = async (symbol: string): Promise<StockQuote> => {
   } catch (error) {
     // Step 4: Strict Error Handling (No Mock Data)
     console.error(`[API Failed] Fetch failed for ${cleanSymbol}`, error);
-
-    // Return a "Zero" state so UI shows "Waiting..." (---) instead of fake data
-    return {
-      symbol: cleanSymbol,
-      price: 0,
-      changePercent: 0
-    };
+    return null;
   }
 };
 
 export const fetchMultipleQuotes = async (symbols: string[]): Promise<StockQuote[]> => {
-  // Using Promise.all to fetch in parallel
-  return Promise.all(symbols.map(s => fetchStockQuote(s)));
+  // Using Promise.all to fetch in parallel and filter out failures
+  const results = await Promise.all(symbols.map(s => fetchStockQuote(s)));
+  return results.filter((q): q is StockQuote => q !== null);
 };

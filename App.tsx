@@ -40,13 +40,6 @@ const App: React.FC = () => {
     }
   };
 
-  // If we are in the expense tracker 'modal' mode or analysis, we might want to hide bottom nav or style differently.
-  // But for simplicity of this web app structure, we keep the Layout wrapper for all, 
-  // or conditionally render Layout based on route.
-
-  // Design Decision: Expense Tracker has its own full screen vibe in the mockups.
-  // Portfolio and Home share the bottom nav. Analysis usually does too.
-
   const isFullScreen = route === AppRoute.EXPENSE;
 
   if (isFullScreen) {

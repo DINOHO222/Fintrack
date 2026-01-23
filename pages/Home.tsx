@@ -12,7 +12,6 @@ interface HomeProps {
 }
 
 const Home: React.FC<HomeProps> = ({ expenses, portfolio, onNavigate, onUpdate }) => {
-  // Calculate Monthly Stats (Optimized to single pass)
   const monthlyStats = useMemo(() => {
     const now = new Date();
     const currentMonth = now.getMonth();
